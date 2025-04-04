@@ -163,67 +163,10 @@
         </div>
     </div>
 
+    <!-- Adicione os scripts na ordem correta -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
     <script src="indices.js"></script>
-    <script>
-        // Variável para controlar alterações não salvas
-        let hasUnsavedChanges = false;
-        let currentAction = null;
-        let actionCallback = null;
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const backBtn = document.getElementById('back-btn');
-            const confirmModal = document.getElementById('confirm-modal');
-            const confirmCancel = document.getElementById('confirm-cancel');
-            const confirmAction = document.getElementById('confirm-action');
-
-            // Configurar o modal de confirmação
-            function showConfirmation(message, callback) {
-                document.getElementById('confirm-message').textContent = message;
-                actionCallback = callback;
-                confirmModal.style.display = 'block';
-            }
-
-            // Botão Voltar
-            backBtn.addEventListener('click', function() {
-                if (hasUnsavedChanges) {
-                    showConfirmation('Você tem alterações não salvas. Deseja realmente sair?', function() {
-                        window.location.href = 'index.html';
-                    });
-                } else {
-                    window.location.href = 'index.html';
-                }
-            });
-
-            // Botões do modal de confirmação
-            confirmCancel.addEventListener('click', function() {
-                confirmModal.style.display = 'none';
-                actionCallback = null;
-            });
-
-            confirmAction.addEventListener('click', function() {
-                if (actionCallback) {
-                    actionCallback();
-                }
-                confirmModal.style.display = 'none';
-                actionCallback = null;
-            });
-
-            // Fechar modal ao clicar fora
-            window.addEventListener('click', function(event) {
-                if (event.target === confirmModal) {
-                    confirmModal.style.display = 'none';
-                    actionCallback = null;
-                }
-            });
-        });
-
-        // Verificar se há alterações não salvas ao sair da página
-        window.addEventListener('beforeunload', function(e) {
-            if (hasUnsavedChanges) {
-                e.preventDefault();
-                e.returnValue = 'Você tem alterações não salvas. Deseja realmente sair?';
-            }
-        });
-    </script>
 </body>
 </html>
