@@ -1,6 +1,4 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, doc, setDoc, getDoc } from "firebase/firestore";
-
+// Configuração do Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCfuB7wfMOXajWuAV1cS2xPsp-3Hx9Upk4",
   authDomain: "calccustas.firebaseapp.com",
@@ -11,8 +9,8 @@ const firebaseConfig = {
   measurementId: "G-3Y1SZK94DT"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// Inicializa o Firebase
+firebase.initializeApp(firebaseConfig);
 
-export { db, doc, setDoc, getDoc };
+// Inicializa o Firestore
+const db = firebase.firestore();
